@@ -26,7 +26,7 @@ answer_lst = [answer_1, answer_2, answer_3, answer_4, answer_5]
 #Helper functions
 
 def next_question():
-    global question_number, cur_question
+    global question_number, cur_question, cur_answer
     if (cur_question in question_lst) and (cur_question != question_5):
         question_number = question_lst.index(cur_question) + 1
         cur_question = question_lst[question_number]
@@ -38,6 +38,7 @@ def next_question():
     
         
 def check_answer():
+    global cur_question, question_number, cur_answer
     if player_answer == cur_answer:
         print 'Correct!'
 
@@ -49,24 +50,26 @@ def check_answer():
 def print_question():
     print 'Question', question_number + 1
     print cur_question
+
     
     
 #define event handlers
 
-def True_button():
+def true_button():
     global player_answer
     player_answer = True
     check_answer()
 
-def False_button():
+def false_button():
     global player_answer
     player_answer = False
     check_answer()
 
-def Restart_button():
-    global cur_question, cur_answer
+def restart_button():
+    global cur_question, cur_answer,question_number
     cur_question = question_1
     cur_answer = answer_1
+    question_number = 0
     print_question()
     
 
@@ -75,10 +78,10 @@ frame = simplegui.create_frame('Q&A Test', 200, 200)
 frame.set_canvas_background('fuchsia')
 
 #register event handlers
-frame.add_button('True', True_button, 60)
-frame.add_button('False', False_button, 60)
-frame.add_button('Restart', Restart_button, 60)
+frame.add_button('True', true_button, 60)
+frame.add_button('False', false_button, 60)
+frame.add_button('Restart', restart_button, 60)
 
 #start frame&timers
-Restart_button()
+restart_button()
 frame.start()
