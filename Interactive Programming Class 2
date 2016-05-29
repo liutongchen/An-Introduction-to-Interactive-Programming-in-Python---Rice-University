@@ -49,7 +49,6 @@ def check_answer():
 def print_question():
     print 'Question', question_number + 1
     print cur_question
-
     
     
 #define event handlers
